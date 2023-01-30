@@ -15,8 +15,10 @@ const aboutContent =
 const contactContent =
 	"Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur provident quo nesciunt molestiae omnis distinctio sapiente corporis iste in deleniti iusto unde rerum fuga, tenetur ut, eligendi consectetur. Sit, ea. Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur provident quo nesciunt molestiae omnis distinctio sapiente corporis iste in deleniti iusto unde rerum fuga, tenetur ut, eligendi consectetur. Sit, ea.Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur provident quo nesciunt molestiae omnis distinctio sapiente corporis iste in deleniti iusto unde rerum fuga, tenetur ut, eligendi consectetur. Sit, ea.Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur provident quo nesciunt molestiae omnis distinctio sapiente corporis iste in deleniti iusto unde rerum fuga, tenetur ut, eligendi consectetur. Sit, ea."
 
+let posts = []
+
 app.get("/", (req, res) => {
-	res.render("home", { homeStartingContent: homeStartingContent })
+	res.render("home", { homeStartingContent: homeStartingContent, posts: posts })
 })
 
 app.get("/about", (req, res) => {
@@ -29,6 +31,17 @@ app.get("/contact", (req, res) => {
 
 app.get("/compose", (req, res) => {
 	res.render("compose")
+})
+
+app.post("/compose", (req, res) => {
+	let postTitle = req.body.postTitle
+	let postBody = req.body.postBody
+	let post = {
+		title: postTitle,
+		content: postBody
+	}
+	posts.push(post)
+	res.redirect("/")
 })
 
 app.listen(3000, () => {

@@ -9,4 +9,16 @@
             <%= homeStartingContent %>
         </p>
     </div>
+    <div>
+        <% posts.forEach((post)=>{ %>
+            <h1>
+                <%= post.title %>
+            </h1>
+            <p>
+                <%= post.content %>
+            </p>
+            <%}) %>
+    </div>
+
+
     <%- include("./partials/footer") %>
