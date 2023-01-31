@@ -33,6 +33,10 @@ app.get("/compose", (req, res) => {
 	res.render("compose")
 })
 
+app.get("/posts/:topic", (req, res) => {
+	console.log(req.params.topic)
+})
+
 app.post("/compose", (req, res) => {
 	let postTitle = req.body.postTitle
 	let postBody = req.body.postBody
