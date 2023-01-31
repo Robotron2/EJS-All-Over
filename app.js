@@ -35,6 +35,13 @@ app.get("/compose", (req, res) => {
 
 app.get("/posts/:topic", (req, res) => {
 	console.log(req.params.topic)
+	let requestedPost = req.params.topic
+	posts.forEach((post) => {
+		let storedPost = post.title
+		if (requestedPost === storedPost) {
+			console.log("Match Found")
+		}
+	})
 })
 
 app.post("/compose", (req, res) => {
