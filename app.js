@@ -1,6 +1,8 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const ejs = require("ejs")
+const _ = require("lodash")
+
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -35,11 +37,14 @@ app.get("/compose", (req, res) => {
 
 app.get("/posts/:topic", (req, res) => {
 	console.log(req.params.topic)
-	let requestedPost = req.params.topic
+	let requestedPost = _.lowerCase(req.params.topic)
 	posts.forEach((post) => {
-		let storedPost = post.title
+		let storedPost = _.lowerCase(post.title)
+		let postContent = post.content
 		if (requestedPost === storedPost) {
-			console.log("Match Found")
+			res.render("post", { postTitle: storedPost, postContent: postContent })
+		} else {
+			console.log("Match not found ")
 		}
 	})
 })
